@@ -1,0 +1,30 @@
+{
+  "collection": "@nestjs/schematics",
+  "sourceRoot": "apps/stardust-fetch/src",
+  "monorepo": true,
+  "root": "apps/stardust-fetch",
+  "compilerOptions": {
+    "webpack": false,
+    "tsConfigPath": "apps/stardust-fetch/tsconfig.app.json"
+  },
+  "projects": {
+    "stardust-fetch": {
+      "type": "application",
+      "root": "fetch",
+      "entryFile": "main",
+      "sourceRoot": "apps/stardust-fetch/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/stardust-fetch/tsconfig.app.json"
+      }
+    },
+    "stardust-publish": {
+      "type": "application",
+      "root": "publish",
+      "entryFile": "main",
+      "sourceRoot": "apps/stardust-publish/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/stardust-publish/tsconfig.app.json"
+      }
+    }
+  }
+}
