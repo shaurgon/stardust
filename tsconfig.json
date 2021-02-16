@@ -12,11 +12,11 @@
     "baseUrl": "./",
     "incremental": true,
     "paths": {
-      "@stardust/aws": [
-        "libs/aws/src"
+      "@stardust/common": [
+        "libs/common/src"
       ],
-      "@stardust/aws/*": [
-        "libs/aws/src/*"
+      "@stardust/common/*": [
+        "libs/common/src/*"
       ],
     }
   }
