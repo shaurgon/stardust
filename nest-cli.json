@@ -1,29 +1,41 @@
 {
   "collection": "@nestjs/schematics",
-  "sourceRoot": "apps/stardust-fetch/src",
+  "sourceRoot": "apps/fetch/src",
   "monorepo": true,
-  "root": "apps/stardust-fetch",
+  "root": "fetch",
   "compilerOptions": {
     "webpack": false,
-    "tsConfigPath": "apps/stardust-fetch/tsconfig.app.json"
+    "tsConfigPath": "apps/fetch/tsconfig.app.json",
+    "deleteOutDir": true
   },
   "projects": {
-    "stardust-fetch": {
+    "fetch": {
       "type": "application",
       "root": "fetch",
       "entryFile": "main",
-      "sourceRoot": "apps/stardust-fetch/src",
+      "sourceRoot": "apps/fetch/src",
       "compilerOptions": {
-        "tsConfigPath": "apps/stardust-fetch/tsconfig.app.json"
+        "tsConfigPath": "apps/fetch/tsconfig.app.json",
+        "deleteOutDir": true
       }
     },
-    "stardust-publish": {
+    "publish": {
       "type": "application",
       "root": "publish",
       "entryFile": "main",
-      "sourceRoot": "apps/stardust-publish/src",
+      "sourceRoot": "apps/publish/src",
       "compilerOptions": {
-        "tsConfigPath": "apps/stardust-publish/tsconfig.app.json"
+        "tsConfigPath": "apps/publish/tsconfig.app.json",
+        "deleteOutDir": true
+      }
+    },
+    "common": {
+      "type": "library",
+      "root": "libs/common",
+      "entryFile": "index",
+      "sourceRoot": "libs/common/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/common/tsconfig.lib.json"
       }
     }
   }
