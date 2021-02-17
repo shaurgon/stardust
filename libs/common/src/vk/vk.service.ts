@@ -27,7 +27,7 @@ export class VkService {
         })
         .catch(this.errorHandler);
       fileData = fileData[0];
-      console.log(`attachment: photo${fileData.owner_id}_${fileData.id}`, fileData);
+      console.log(`attachment: photo${fileData.owner_id}_${fileData.id}`);
       return [`photo${fileData.owner_id}_${fileData.id}`];
     } catch (error) {
       console.error(error);
@@ -42,7 +42,7 @@ export class VkService {
         message: textMessage,
         ...(photos && { attachments: photos.join(',') }),
         from_group: 1,
-        v: '5.124',
+        v: '5.130',
       })
       .catch(this.errorHandler);
   }

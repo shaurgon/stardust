@@ -24,7 +24,7 @@ const vkConnectionFactory = {
   provide: VK_CONNECTION,
   useFactory: async (config: ConfigService): Promise<any> => {
     const params = config.get<ConnectionParams>('vk');
-    return await easyvk({ ...params, utils: { uploader: true } });
+    return await easyvk({ ...params, utils: { uploader: true }, mode: 'highload' });
   },
   inject: [ConfigService],
 };
