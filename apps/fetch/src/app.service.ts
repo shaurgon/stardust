@@ -1,7 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { Path, Sign } from './app.interfaces';
-import { FetchProvider, SqsProvider } from '@stardust/common';
 import { ConfigService } from '@nestjs/config';
+import { FetchProvider } from '@stardust/common/fetch/fetch.provider';
+import { SqsProvider } from '@stardust/common/aws/sqs.provider';
 
 interface publishParams {
   sign: string;

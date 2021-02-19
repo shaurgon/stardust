@@ -1,11 +1,14 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import * as moment from 'moment';
 
 import { MessagesContainer } from './interfaces';
-import { vkResponse, VkService } from '@stardust/common';
+import { VkService } from '@stardust/common/vk/vk.service';
+import { vkResponse } from '@stardust/common/vk/vk.interface';
 
 @Injectable()
 export class AppService {
+  private readonly logger: Logger = new Logger(AppService.name);
+
   constructor(private readonly vkService: VkService) {}
 
   // async publishTG(sign: string, textMessage: string): Promise<any> {
@@ -33,15 +36,15 @@ export class AppService {
         const vkMessage = `${type === 'next_week' ? nextWeekDate : nextDate}\n${body}`;
         const photos = await this.vkService.uploadWallPhotoByUrl(photoUrl, sign);
         const result: vkResponse = await this.vkService.postMessage(sign, vkMessage, photos);
-        console.log(`Published to '${sign}' group with post_id ${result.post_id}`);
+        this.logger.log(`Published to '${sign}' group with post_id ${result.post_id}`);
 
         if (type === 'next_week') {
           const pinned: boolean = await this.vkService.pinMessage(sign, result.post_id);
-          pinned && console.log(`${result.post_id} was pinned`);
+          pinned && this.logger.log(`${result.post_id} was pinned`);
         }
       } else {
         // todo сделать алертинг в телегу
-        console.error('body is broken! Pls fixme!', body);
+        this.logger.error('body is broken! Pls fixme!', body);
       }
     }
 

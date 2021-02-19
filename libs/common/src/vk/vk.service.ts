@@ -1,10 +1,12 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable, Logger } from '@nestjs/common';
 
 import { VK_CONNECTION } from './vk.constants';
 import { SignGroups, vkError } from './vk.interface';
 
 @Injectable()
 export class VkService {
+  private readonly logger: Logger = new Logger(VkService.name);
+
   @Inject(VK_CONNECTION)
   private vk: any;
 
@@ -27,10 +29,10 @@ export class VkService {
         })
         .catch(this.errorHandler);
       fileData = fileData[0];
-      console.log(`attachment: photo${fileData.owner_id}_${fileData.id}`);
+      this.logger.log(`attachment: photo${fileData.owner_id}_${fileData.id}`);
       return [`photo${fileData.owner_id}_${fileData.id}`];
     } catch (error) {
-      console.error(error);
+      this.logger.error(error);
     }
   }
 
@@ -59,6 +61,6 @@ export class VkService {
   }
 
   errorHandler(e: vkError) {
-    console.error(e.error_msg);
+    this.logger.error(e.error_msg);
   }
 }
