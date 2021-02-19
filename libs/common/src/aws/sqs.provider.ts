@@ -15,8 +15,9 @@ export class SqsProvider {
     this.queueUrl = `${config.params.endpoint}/${config.queue}`;
   }
 
-  async sendMessage(messageBody: string, attributes?: MessageBodyAttributeMap): Promise<void> {
+  async sendMessage(messageBody: string, attributes?: MessageBodyAttributeMap, delay = 0): Promise<void> {
     const params: SendMessageRequest = {
+      DelaySeconds: delay * 15,
       QueueUrl: this.queueUrl,
       MessageBody: messageBody,
       MessageAttributes: attributes,

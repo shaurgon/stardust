@@ -8,6 +8,7 @@ interface publishParams {
   sign: string;
   dataType: string;
   photoLink?: string;
+  delay?: number;
 }
 
 @Injectable()
@@ -36,27 +37,21 @@ export class AppService {
           ? `${this.config.baseUrl}/${path}?id=${signId + 1}`
           : `${this.config.baseUrl}/${path}/${Sign[sign]}.html`;
       const data: string = await this.fetchProvider.fetchData(link);
-      await this.publish(data, { sign, dataType, photoLink: photos[signId] });
-      await this.delay(1000); // Иначе ВК банит по рейт лимитам
+      await this.publish(data, { sign, dataType, photoLink: photos[signId], delay: signId });
     }
     return 'done';
   }
 
-  async publish(data: string, { sign, dataType, photoLink }: publishParams) {
-    console.log(data);
-    console.log(sign, dataType, photoLink);
-    await this.sqsProvider.sendMessage(data, {
-      sign: { DataType: 'string', StringValue: sign },
-      type: { DataType: 'string', StringValue: dataType },
-      ...(photoLink && { photo: { DataType: 'string', StringValue: photoLink } }),
-    });
-  }
-
-  delay(ms: number): Promise<void> {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve();
-      }, ms);
-    });
+  async publish(data: string, { sign, dataType, photoLink, delay }: publishParams) {
+    await this.sqsProvider.sendMessage(
+      data,
+      {
+        sign: { DataType: 'string', StringValue: sign },
+        type: { DataType: 'string', StringValue: dataType },
+        ...(photoLink && { photo: { DataType: 'string', StringValue: photoLink } }),
+      },
+      delay
+    );
+    console.log(`${sign} (${dataType}) was published (delay ${delay * 15}s)`);
   }
 }
