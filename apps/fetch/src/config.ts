@@ -11,13 +11,9 @@ export default () => ({
     part: process.env.HORO_PART || '',
   },
   pixabay: {
-    key: process.env.PIXABAY_API_KEY || '',
-    q: 'sea',
-    category: 'nature',
-    min_width: 700,
-    min_height: 500,
-    orientation: 'horizontal',
-    image_type: 'photo',
-    order: 'latest',
+    apiKey: process.env.PIXABAY_API_KEY || '',
+  },
+  pexels: {
+    apiKey: process.env.PEXELS_API_KEY || '',
   },
 });

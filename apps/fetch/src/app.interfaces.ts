@@ -1,6 +1,6 @@
 export enum Path {
   next_day = 'goroskop_na_zavtra',
-  next_week = 'goroskop_na_sleduyuschyuyu_nedelyu.php',
+  week = 'goroskop_na_nedelyu',
 }
 
 export enum Sign {

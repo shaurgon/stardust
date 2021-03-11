@@ -14,7 +14,7 @@ export async function fetchDay(): Promise<any> {
 
 export async function fetchWeek(): Promise<any> {
   const app = await NestFactory.create<NestExpressApplication>(AppModule, { logger: false });
-  const data = await app.get(AppService).collectData('next_week');
+  const data = await app.get(AppService).collectData('week');
   return {
     code: 200,
     body: data,
