@@ -1,8 +1,10 @@
 import { Module } from '@nestjs/common';
-import { FetchProvider } from './fetch.provider';
+import { HoroService } from './services/horo.service';
+import { PixabayService } from './services/pixabay.service';
+import { PexelsService } from './services/pexels.service';
 
 @Module({
-  providers: [FetchProvider],
-  exports: [FetchProvider],
+  providers: [HoroService, PixabayService, PexelsService],
+  exports: [HoroService, PixabayService, PexelsService],
 })
 export class FetchModule {}
