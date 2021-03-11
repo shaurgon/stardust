@@ -11,7 +11,7 @@ export class LoggerProvider implements LoggerService {
   ) {}
 
   getMessage(message: any, context?: string) {
-    return context ? `[ ${context} ] ${message}` : message;
+    return context ? `${context} - ${message}` : message;
   }
 
   error(message: any, trace?: string, context?: string): void {
